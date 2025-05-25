@@ -1,0 +1,78 @@
+-- Database Creation
+CREATE DATABASE IF NOT EXISTS smart_police_system;
+USE smart_police_system;
+
+-- Table: admins
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Insert admin data
+INSERT INTO `admins` (`id`, `username`, `password`) VALUES
+(1, 'tristan', '0192023a7bbd73250516f069df18b500');
+
+-- Table: incident_reports
+CREATE TABLE IF NOT EXISTS `incident_reports` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `location` VARCHAR(255) NOT NULL,
+  `incident_type` VARCHAR(255) NOT NULL,
+  `incident_date` DATE NOT NULL,
+  `incident_time` TIME NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Insert incident report data
+INSERT INTO `incident_reports` (`id`, `location`, `incident_type`, `incident_date`, `incident_time`, `created_at`) VALUES
+(1, 'Barangay Anos, Los Baños, Laguna', 'Car Accident', '2024-10-14', '00:30:00', '2024-10-15 17:22:14'),
+(2, 'Barangay Anos, Los Baños, Laguna', 'Fire Incident', '2024-10-15', '15:45:00', '2024-10-15 17:22:14'),
+(3, 'Barangay Batong Malake, Los Baños, Laguna', 'Robbery', '2019-10-19', '02:16:00', '2024-10-17 18:15:33'),
+(4, 'Barangay Anos, Los Baños, Laguna', 'Car Incident', '2020-07-29', '04:17:00', '2024-10-17 18:16:19'),
+(5, 'Barangay Anos, Los Baños, Laguna', 'Robbery', '2020-10-18', '00:00:00', '2024-10-17 20:20:19'),
+(6, 'Barangay Tuntungin, Los Baños, Laguna', 'Robbery', '2021-08-18', '04:06:00', '2024-10-17 20:22:01'),
+(7, 'Barangay Maahas, Los Baños, Laguna', 'Homicide', '2021-10-18', '00:00:00', '2024-10-17 20:51:37'),
+(8, 'Barangay Anos, Los Baños, Laguna', 'Homicide', '2024-10-26', '00:00:00', '2024-10-17 20:54:50'),
+(9, 'Barangay Anos, Los Baños, Laguna', 'Homicide', '2024-10-19', '05:19:00', '2024-10-17 21:20:01'),
+(10, 'Barangay Anos, Los Baños, Laguna', 'Car Incident', '2024-10-11', '00:00:00', '2024-10-17 21:23:37'),
+(11, 'Barangay Anos, Los Baños, Laguna', 'Homicide', '2024-10-10', '16:24:00', '2024-10-17 21:24:21');
+
+-- Table: police_reports
+CREATE TABLE IF NOT EXISTS `police_reports` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `age` INT(11) NOT NULL CHECK (`age` > 0),
+  `address` VARCHAR(255) NOT NULL,
+  `offense` VARCHAR(255) NOT NULL,
+  `date_of_case` DATE NOT NULL,
+  `report_time` TIME NOT NULL,  -- Added time field for reporting time
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Insert police report data
+INSERT INTO `police_reports` (`id`, `name`, `age`, `address`, `offense`, `date_of_case`, `report_time`, `created_at`) VALUES
+(1, 'Juan Dela Cruz', 30, '123 Barangay St.', 'Car Theft', '2024-06-21', '10:30:00', '2024-10-15 17:22:14'),
+(2, 'Pedro Penduko', 24, 'Brgy. Anos', 'Robbery', '2024-10-18', '14:45:00', '2024-10-17 16:08:33'),
+(3, 'San Juan', 25, 'Brgy. Anos', 'Robbery', '2024-10-12', '11:15:00', '2024-10-17 19:19:51'),
+(4, 'Trtrtrtrtrtrtrtrt', 24, 'Brgy. Anos, Los Baños, Laguna', 'Robbery', '2024-10-26', '09:30:00', '2024-10-17 19:32:20'),
+(5, 'Hahahaha', 20, 'Brgy. Maahas, Los Baños, Laguna', 'Homicide', '2024-06-26', '16:50:00', '2024-10-17 20:53:45'),
+(6, 'Pena', 52, 'Brgy. Maahas, Los Baños, Laguna', 'Sexual Offenses', '2024-10-11', '13:20:00', '2024-10-17 20:56:47');
+
+-- Create a dynamic view to calculate crime statistics based on incident type
+CREATE VIEW `crime_statistics_view` AS
+SELECT 
+    `incident_type` AS `crime_type`,
+    COUNT(*) AS `number_of_cases`,
+    DATE_FORMAT(`incident_date`, '%Y') AS `year_recorded`
+FROM `incident_reports`
+GROUP BY `crime_type`, `year_recorded`
+ORDER BY `year_recorded` DESC;
+
+-- Set AUTO_INCREMENT values for tables
+ALTER TABLE `admins` AUTO_INCREMENT = 2;
+ALTER TABLE `incident_reports` AUTO_INCREMENT = 12;  -- Updated based on the last inserted ID
+ALTER TABLE `police_reports` AUTO_INCREMENT = 7;  -- Updated based on the last inserted ID

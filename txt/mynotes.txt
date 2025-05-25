@@ -1,0 +1,27 @@
+BRGY in Los Baños Laguna
+BRGY. Anos
+BRGY. Bagong Silang
+BRGY. Bambang
+BRGY. Batong Malake
+BRGY. Baybayin
+BRGY. Bayog
+BRGY. Lalakay
+BRGY. Maahas
+BRGY. Malinta
+BRGY. Mayondon
+BRGY. Putho Tuntungin
+BRGY. San Antonio
+BRGY. Tadlak
+BRGY. Timugan
+
+type of police report
+Homicide
+Assault
+Theft
+Robbery
+Sexual Offenses
+Fraud
+Vandalism
+Drug Offenses
+Traffic Offenses
+Child AbuseWeapons Offenses

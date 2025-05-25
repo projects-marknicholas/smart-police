@@ -1,0 +1,29 @@
+<?php
+// Include database connection
+include 'includes/db_connection.php';
+
+// Check if 'id' is passed in the URL
+if (isset($_GET['id'])) {
+    // Get the id from the URL
+    $id = $_GET['id'];
+
+    // Prepare and execute the SQL DELETE query
+    $sql = "DELETE FROM police_reports WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        // If successful, redirect back to the police reports page with a success message
+        header("Location: police_reports.php?msg=deleted");
+    } else {
+        // If there is an error, redirect back with an error message
+        header("Location: police_reports.php?msg=error");
+    }
+
+    // Close the statement and the connection
+    $stmt->close();
+    $conn->close();
+} else {
+    // If no 'id' is provided, redirect to the police reports page
+    header("Location: police_reports.php");
+}

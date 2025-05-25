@@ -1,0 +1,130 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header and footer styling */
+header, footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 1000; /* Ensure sidebar overlays other elements */
+}
+
+/* Sidebar navigation */
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav ul li {
+    padding: 10px;
+}
+
+.sidebar nav ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #6A5ACD;
+}
+
+/* Content styling */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    /* Sidebar adjustments */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        transform: translateX(-100%); /* Hide sidebar by default on mobile */
+        position: fixed;
+    }
+
+    /* Show sidebar when active */
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    /* Sidebar links styling */
+    .sidebar nav ul li a {
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    /* Toggle button for sidebar */
+    .toggle-btn {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        font-size: 24px;
+        color: white;
+        background-color: black;
+        border: none;
+        cursor: pointer;
+        z-index: 1100; /* Ensure button overlays content */
+    }
+
+    /* Content adjustments for smaller screens */
+    .content {
+        margin-left: 0;
+        padding-top: 60px; /* Space for toggle button */
+    }
+
+    /* Table adjustments for readability on mobile */
+    table {
+        font-size: 14px;
+    }
+}
+
+/* Media Query for Extra Small Screens (Optional) */
+@media (max-width: 480px) {
+    th, td {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
