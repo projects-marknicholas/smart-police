@@ -20,6 +20,9 @@
     <a href="prediction.php">
         <i class="fas fa-chart-line"></i> <span>Prediction</span>
     </a>
+    <a href="predictions.php">
+        <i class="fas fa-chart-line"></i> <span>Prediction Graph</span>
+    </a>
     <a href="map_page.php">
         <i class="fas fa-map-marked-alt"></i> <span>Map Hotspot</span>
     </a>
